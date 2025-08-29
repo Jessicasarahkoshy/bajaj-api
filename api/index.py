@@ -30,7 +30,12 @@ def extract_letters_from_string(s: str):
 def is_integer_string(s):
     return isinstance(s, int) or (isinstance(s, str) and re.fullmatch(r'\d+', s))
 
+@app.route("/", methods=["GET"])
+def health():
+    return jsonify({"status": "ok", "message": "BFHL API running"}), 200
+
 @app.route("/", methods=["POST"])
+@app.route("/bfhl", methods=["POST"])
 def bfhl_root():
     try:
         body = request.get_json(force=True)
